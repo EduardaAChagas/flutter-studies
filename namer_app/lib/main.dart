@@ -52,12 +52,10 @@ class MyHomePage extends StatelessWidget {
     var appState = context.watch<MyAppState>();
     var pair = appState.current;
 
-    IconData icon;
-    if (appState.favorites.contains(pair)) {
-      icon = Icons.favorite;
-    } else {
-      icon = Icons.favorite_border;
-    }
+    // Define o ícone com base no estado de favorito
+    IconData icon = appState.favorites.contains(pair)
+        ? Icons.favorite
+        : Icons.favorite_border;
 
     return Scaffold(
       body: Center(
@@ -71,22 +69,18 @@ class MyHomePage extends StatelessWidget {
               children: [
                 ElevatedButton.icon(
                   onPressed: () {
-                    appState.toggleFavorite();
+                    appState.toggleFavorite(); // Alterna o favorito
                   },
                   icon: Icon(icon),
-                  label: Text('Like'),
+                  label: Text('Like'), // Mostra o texto "Like"
                 ),
                 SizedBox(width: 10),
-
-                  ElevatedButton(
+                ElevatedButton(
                   onPressed: () {
-                    appState.getNext();
+                    appState.getNext(); // Gera uma nova palavra
                   },
                   child: Text('Next'),
-                )
-              ]
                 ),
-
               ],
             ),
           ],
